@@ -8,12 +8,12 @@ import SEO from "../components/seo"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Data Analytics for Grand Comics Database</h1>
+    <h1>Data Analytics for GCD</h1>
     <p>Details coming soon!</p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <Link to="/imhotep/">Imhotep Sample Queries</Link>
   </Layout>
 )
 

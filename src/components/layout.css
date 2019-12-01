@@ -8,6 +8,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+footer {
+    padding-top: 20px;
+    font-size: small;
+}
 article,
 aside,
 details,
