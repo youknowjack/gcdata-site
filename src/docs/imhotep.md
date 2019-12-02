@@ -5,8 +5,8 @@ title: "GCD Comics Data Analytics: Imhotep Sample Queries"
 
 # Imhotep Sample Queries
 
-#### Counts of Series, Issues, Stories by Country
 <a name="q1"></a>
+#### Counts of Series, Issues, Stories by Country
 
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>
@@ -18,8 +18,8 @@ SELECT distinct(series_id) /* series */,
 
 <a href="https://imhotep.gcdata.org/iql/q/CTT3AY" target="_blank">▶️ Run Query</a>
 
-#### Top English Language Writers, by issue count, with series and publisher counts
 <a name="q2"></a>
+#### Top English Language Writers, by issue count, with series and publisher counts
 
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>
