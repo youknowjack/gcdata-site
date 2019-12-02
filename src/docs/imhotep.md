@@ -6,7 +6,9 @@ title: "GCD Comics Data Analytics: Imhotep Sample Queries"
 # Imhotep Sample Queries
 
 <a name="q1"></a>
-#### Counts of Series, Issues, Stories by Country
+### Counts of series, issues, and stories, by country code
+
+Did you know that 59% of series in GCD are from outside the United States?
 
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>
@@ -19,7 +21,9 @@ SELECT distinct(series_id) /* series */,
 <a href="https://imhotep.gcdata.org/iql/q/CTT3AY" target="_blank">▶️ Run Query</a>
 
 <a name="q2"></a>
-#### Top English Language Writers, by issue count, with series and publisher counts
+### Top English-language writers, by issue count, with series and publisher counts
+
+Think Stan Lee is in the top spot? Then I guess you don't know Jack...
 
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>
