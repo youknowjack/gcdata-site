@@ -13,7 +13,7 @@ const IndexPage = () => (
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
-    <Link to="/imhotep/">Imhotep Sample Queries</Link>
+    <Link to="/doc/imhotep-sample-queries/">Imhotep Sample Queries</Link>
   </Layout>
 )
 
