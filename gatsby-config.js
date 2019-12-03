@@ -35,6 +35,13 @@ module.exports = {
         },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+        options: {
+          path: `${__dirname}/src/imhotep-samples`,
+          name: `imhotep-samples`,
+        },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
