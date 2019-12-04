@@ -2,7 +2,7 @@
 heading: Series by Stan Lee, with issue counts
 blurb: Stan did write a LOT of comics!
 shortlink: TFFEX8
-position: 2
+position: 20
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

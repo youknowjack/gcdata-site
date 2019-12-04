@@ -2,7 +2,7 @@
 heading: Variants of The Amazing Spider-Man 666
 blurb: Face it, Tiger... you just hit the jackpot!
 shortlink: 2XAZ6F
-position: 8
+position: 80
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

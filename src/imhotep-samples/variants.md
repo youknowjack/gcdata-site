@@ -2,7 +2,7 @@
 heading: Issues with greatest number of variants published
 blurb: Spider-Man, Batman, and Godzilla take the top spots.
 shortlink: Z2WHYR
-position: 7
+position: 70
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

@@ -2,7 +2,7 @@
 heading: Series drawn by Curt Swan, with issue counts
 blurb: Curt drew that iconic "S" more than maybe anyone.
 shortlink: M42DFD
-position: 4
+position: 40
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

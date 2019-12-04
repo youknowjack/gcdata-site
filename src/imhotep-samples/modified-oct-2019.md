@@ -2,7 +2,7 @@
 heading: GCD issue entries modified in October 2019, with series, issue, story counts
 blurb: Over 50,000 issues were modified in this month alone!
 shortlink: YCCHTW
-position: 10
+position: 100
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

@@ -2,7 +2,7 @@
 heading: Most common page counts for English-language comics
 blurb: The ubiquitous 36-pager takes the top spot. Number 3 may surprise you!
 shortlink: KAFXFR
-position: 5
+position: 50
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

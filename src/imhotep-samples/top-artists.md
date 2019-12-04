@@ -2,7 +2,7 @@
 heading: Top artists, by issue count, with series and publisher counts
 blurb: Jack Kirby went through a lot of pencils in his lifetime!
 shortlink: RR96E2
-position: 3
+position: 30
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

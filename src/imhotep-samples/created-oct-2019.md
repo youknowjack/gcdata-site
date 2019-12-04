@@ -2,7 +2,7 @@
 heading: GCD issue entries created in October 2019, with series, issue, story counts
 blurb: Check out 10/29! It was a busy day.
 shortlink: RHXWZT
-position: 9
+position: 90
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>

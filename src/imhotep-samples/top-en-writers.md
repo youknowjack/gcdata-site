@@ -2,7 +2,7 @@
 heading: Top English-language writers, by issue count, with series and publisher counts
 blurb: Think Stan Lee is in the top spot? Then I guess you don't know Jack...
 shortlink: AY9RYW
-position: 1
+position: 10
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>
