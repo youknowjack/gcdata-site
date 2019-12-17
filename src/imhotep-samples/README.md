@@ -1,4 +1,4 @@
-# Have a query you want to add to [the sample queries page](https://www.gcdata.org/imhotep-samples)?
+# Have a query you want to add to [the Imhotep sample queries page](https://www.gcdata.org/imhotep-samples)?
 
 Send a pull request with a new Markdown file in this directory. It should contain a frontmatter section:
 ```
