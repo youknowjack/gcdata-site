@@ -16,4 +16,5 @@ WHERE snapshot=20191215 AND
         series_language_code = 'en' AND variant_of_issue_id = 0
 GROUP BY  story.writer
 ORDER BY  issues DESC
+LIMIT 1000
 ``

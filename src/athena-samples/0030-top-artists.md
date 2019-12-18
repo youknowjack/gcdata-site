@@ -17,4 +17,5 @@ WHERE snapshot=20191215 AND
         variant_of_issue_id=0
 GROUP BY story.artist
 ORDER BY issues DESC
+LIMIT 1000
 ```
