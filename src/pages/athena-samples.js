@@ -5,14 +5,14 @@ import Layout from "../components/layout"
 class AthenaSampleQuery extends React.Component {
   render() {
     const samples = this.props.data.allMarkdownRemark.edges
-    const sqlurl = "https://athena.gcdata.org/embed/";
+    const sqlurl = "http://athena.gcdata.org/embed/";
 
     return (
       <Layout>
         <div className="doc-content">
           <h1>Sample Athena Queries</h1>
           <p>Each sample query below includes the SQL along with a link to run the query on Athena
-          via a Redash front-end. In each query, the <code>&lt;snapshot&gt;</code> filter in the WHERE clause references the
+          via a Redash front-end. In each query, the <code>snapshot=</code> filter in the WHERE clause references the
           date of the GCD data dump.</p>
           <p>If you would like to run your own queries, email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a> to request
           a Redash account.</p>
@@ -29,6 +29,10 @@ class AthenaSampleQuery extends React.Component {
               <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
               <p><a href={sqlurl + sample.node.frontmatter.link} target="_blank"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
+                {sample.node.frontmatter.graph &&
+                <span style={{marginLeft: 20}}><a href={sqlurl + sample.node.frontmatter.graph} target="_blank"
+                ><span role="img" aria-label="play button">▶️</span> Show Graph</a></span>
+                }
               </p>
             </div>
           ))}
@@ -50,6 +54,7 @@ export const sampleQueryQuery = graphql`
           html
           frontmatter {
             link
+            graph
             heading
             blurb
             position
