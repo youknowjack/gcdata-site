@@ -6,12 +6,12 @@ position: 60
 ---
 ```sql
 SELECT i.price,
-        count(distinct(issueId)) as issues
+        count(distinct(issue_id)) as issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 CROSS JOIN UNNEST(price) AS i(price)
 WHERE snapshot = 20191215 AND
-	i.price LIKE '%USD%' AND
-	publicationDate > 20190000
+        i.price LIKE '%USD%' AND
+        publication_date > 20190000
 GROUP BY i.price
 ORDER BY issues DESC
 LIMIT 10

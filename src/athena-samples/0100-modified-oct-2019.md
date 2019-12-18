@@ -6,9 +6,9 @@ position: 100
 ---
 ```sql
 SELECT modified,
-        count(distinct(seriesId)) as series,
-        count(distinct(issueId)) as issues,
-        count(distinct(storyId)) as stories
+        count(distinct(series_id)) as series,
+        count(distinct(issue_id)) as issues,
+        count(distinct(story_id)) as stories
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 WHERE snapshot = 20191215 AND modified < 20191101 AND modified > 20191000
 GROUP BY modified

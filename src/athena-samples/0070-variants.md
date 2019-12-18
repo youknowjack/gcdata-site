@@ -5,17 +5,17 @@ link: query/9/visualization/11?api_key=ytKIY01ROHDxFM6gLYsSsyftAccDoeMRmuo81coP
 position: 70
 ---
 ```sql
-SELECT variantOfIssueId,
-         seriesName,
-         issueNumberRaw,
-         publicationDate,
-         count(distinct(issueId)) as issues
+SELECT variant_of_issue_id,
+         series_name,
+         issue_number_raw,
+         publication_date,
+         count(distinct(issue_id)) as issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot = 20191215 AND variantOfIssueId != 0
-GROUP BY variantOfIssueId,
-         seriesName,
-         issueNumberRaw,
-         publicationDate
+WHERE snapshot = 20191215 AND variant_of_issue_id != 0
+GROUP BY variant_of_issue_id,
+         series_name,
+         issue_number_raw,
+         publication_date
 ORDER BY issues DESC
 LIMIT 100
 ```

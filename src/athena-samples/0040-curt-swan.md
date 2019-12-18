@@ -5,12 +5,12 @@ link: query/6/visualization/7?api_key=wDP7pjPhD4s8p9Zu9VT9K7DdGZXxgZtpxrodHxtQ
 position: 40
 ---
 ```sql
-SELECT seriesName,
-         count(distinct(issueId)) AS issues
+SELECT series_name,
+         count(distinct(issue_id)) AS issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 WHERE snapshot=20191215 AND
-	contains(storyPencils, 'Curt Swan') AND
-	variantOfIssueId = 0
-GROUP BY  seriesName
+        contains(story_pencils, 'Curt Swan') AND
+        variant_of_issue_id = 0
+GROUP BY  series_name
 ORDER BY  issues DESC
 ```

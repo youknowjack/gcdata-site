@@ -5,8 +5,8 @@ link: query/10/visualization/12?api_key=HkfYZdZ1pTmnauDRErqQoHDigTCGKELGzyM2jZdh
 position: 80
 ---
 ```sql
-SELECT seriesName, issueNumberRaw, variantName
+SELECT series_name, issue_number_raw, variant_name
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot = 20191215 AND variantOfIssueId = 863623
-GROUP BY seriesName, issueNumberRaw, variantName
+WHERE snapshot = 20191215 AND variant_of_issue_id = 863623
+GROUP BY series_name, issue_number_raw, variant_name
 ```

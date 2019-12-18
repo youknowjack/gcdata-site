@@ -7,7 +7,7 @@ position: 9999
 ---
 ```sql
 SELECT snapshot,
-        count(distinct(issueId)) as issues
+        count(distinct(issue_id)) as issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 GROUP BY snapshot
 ```

@@ -6,14 +6,14 @@ position: 10
 ---
 ```sql
 SELECT story.writer,
-         count(distinct(issueId)) AS issues,
-         count(distinct(seriesId)) AS series,
-         count(distinct(publisherId)) AS publishers
+         count(distinct(issue_id)) AS issues,
+         count(distinct(series_id)) AS series,
+         count(distinct(publisher_id)) AS publishers
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-CROSS JOIN UNNEST(storyScript) AS story(writer)
+CROSS JOIN UNNEST(story_script) AS story(writer)
 WHERE snapshot=20191215 AND
-	story.writer NOT LIKE '%?%' AND story.writer != '' AND
-	seriesLanguageCode = 'en' AND variantOfIssueId = 0
+        story.writer NOT LIKE '%?%' AND story.writer != '' AND
+        series_language_code = 'en' AND variant_of_issue_id = 0
 GROUP BY  story.writer
 ORDER BY  issues DESC
-```
+``

@@ -5,13 +5,13 @@ link: query/7/visualization/8?api_key=KwXy5dPATb5Xjs7ooZRXBhg0HUSX5G7947PezyHa
 position: 50
 ---
 ```sql
-SELECT pageCount,
-        count(distinct(issueId)) as issues
+SELECT page_count,
+        count(distinct(issue_id)) as issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 WHERE snapshot=20191215 AND
-	seriesLanguageCode = 'en' AND
-	pageCount != 0
-GROUP BY pageCount
+        series_language_code = 'en' AND
+        page_count != 0
+GROUP BY page_count
 ORDER BY issues DESC
 LIMIT 1000
 ```

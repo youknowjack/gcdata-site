@@ -6,15 +6,15 @@ position: 30
 ---
 ```sql
 SELECT story.artist,
-        count(distinct(issueId)) as issues,
-        count(distinct(seriesId)) as series,
-        count(distinct(publisherId)) as publishers
+        count(distinct(issue_id)) as issues,
+        count(distinct(series_id)) as series,
+        count(distinct(publisher_id)) as publishers
 FROM gcdissuesnapshot.gcdissuesnapshot
-CROSS JOIN UNNEST(storyPencils) AS story(artist)
+CROSS JOIN UNNEST(story_pencils) AS story(artist)
 WHERE snapshot=20191215 AND
-	story.artist not like '%?%' AND
-	story.artist NOT IN ('', 'various') AND
-	variantOfIssueId=0
+        story.artist not like '%?%' AND
+        story.artist NOT IN ('', 'various') AND
+        variant_of_issue_id=0
 GROUP BY story.artist
 ORDER BY issues DESC
 ```

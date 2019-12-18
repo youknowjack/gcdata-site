@@ -5,12 +5,12 @@ link: query/2/visualization/3?api_key=X2eAZDiEF7QwWDk0fK7LFukhOgVxjtJldHWIovAk
 position: 0
 ---
 ```sql
-SELECT seriesCountryCode,
-         count(distinct(seriesId)) AS series,
-         count(distinct(issueId)) AS issues,
-         count(distinct(storyId)) AS stories
+SELECT series_country_code,
+         count(distinct(series_id)) AS series,
+         count(distinct(issue_id)) AS issues,
+         count(distinct(story_id)) AS stories
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 WHERE snapshot=20191215
-GROUP BY  seriesCountryCode
+GROUP BY  series_country_code
 ORDER BY  series DESC
 ```
