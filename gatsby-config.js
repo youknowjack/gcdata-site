@@ -37,6 +37,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
         options: {
+          path: `${__dirname}/src/athena-samples`,
+          name: `athena-samples`,
+        },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+        options: {
           path: `${__dirname}/src/imhotep-samples`,
           name: `imhotep-samples`,
         },
