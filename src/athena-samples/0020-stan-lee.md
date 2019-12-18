@@ -8,7 +8,9 @@ position: 20
 SELECT seriesName,
          count(distinct(issueId)) AS issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot=20191215 AND contains(storyScript, 'Stan Lee') AND seriesLanguageCode = 'en' AND variantOfIssueId = 0
+WHERE snapshot=20191215 AND
+	contains(storyScript, 'Stan Lee') AND
+	seriesLanguageCode = 'en' AND variantOfIssueId = 0
 GROUP BY  seriesName
 ORDER BY  issues DESC
 ```

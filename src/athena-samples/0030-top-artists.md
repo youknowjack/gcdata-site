@@ -11,7 +11,10 @@ SELECT story.artist,
         count(distinct(publisherId)) as publishers
 FROM gcdissuesnapshot.gcdissuesnapshot
 CROSS JOIN UNNEST(storyPencils) AS story(artist)
-WHERE snapshot=20191215 AND story.artist not like '%?%' AND story.artist NOT IN ('', 'various') AND variantOfIssueId=0
+WHERE snapshot=20191215 AND
+	story.artist not like '%?%' AND
+	story.artist NOT IN ('', 'various') AND
+	variantOfIssueId=0
 GROUP BY story.artist
 ORDER BY issues DESC
 ```
