@@ -6,6 +6,7 @@ class AthenaSampleQuery extends React.Component {
   render() {
     const samples = this.props.data.allMarkdownRemark.edges
     const sqlurl = "http://athena.gcdata.org/embed/";
+    const snapshot = 20191215;
 
     return (
       <Layout>
@@ -26,10 +27,10 @@ class AthenaSampleQuery extends React.Component {
               </h3>
               <p>{sample.node.frontmatter.blurb}</p>
               <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
-              <p><a href={sqlurl + sample.node.frontmatter.link} target="_blank"
+              <p><a href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=" + snapshot} target="_blank"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
                 {sample.node.frontmatter.graph &&
-                <span style={{marginLeft: 20}}><a href={sqlurl + sample.node.frontmatter.graph} target="_blank"
+                <span style={{marginLeft: 20}}><a href={sqlurl + sample.node.frontmatter.graph + "&p_snapshot=" + snapshot} target="_blank"
                 ><span role="img" aria-label="play button">▶️</span> Show Graph</a></span>
                 }
               </p>
