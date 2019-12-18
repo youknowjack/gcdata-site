@@ -17,8 +17,7 @@ class AthenaSampleQuery extends React.Component {
           <p>If you would like to run your own queries, email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a> to request
           a Redash account.</p>
           <p>If you notice a problem, please open
-          a <a href="https://github.com/youknowjack/gcd-imhotep/issues/new" target="_blank">Github issue</a> in <code>gcd-imhotep</code> (project name to be changed soon) or
-          email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a>.</p>
+          a <a href="https://github.com/youknowjack/gcd-imhotep/issues/new" target="_blank">Github issue</a> in <code>gcd-imhotep</code> (project name to be changed soon).</p>
 
           {samples.map(sample => (
             <div id={sample.node.frontmatter.position}>
