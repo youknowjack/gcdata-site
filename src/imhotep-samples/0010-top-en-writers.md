@@ -1,6 +1,6 @@
 ---
 heading: Top English-language writers, by issue count, with series and publisher counts
-blurb: Think Stan Lee is in the top spot? Then I guess you don't know Jack...
+blurb: Stan is the man, but do you know Jack?
 shortlink: AY9RYW
 position: 10
 ---
