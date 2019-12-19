@@ -7,6 +7,6 @@ position: 80
 ```sql
 SELECT series_name, issue_number_raw, variant_name
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot = 20191215 AND variant_of_issue_id = 863623
+WHERE snapshot = SNAPSHOT_DATE_HERE AND variant_of_issue_id = 863623
 GROUP BY series_name, issue_number_raw, variant_name
 ```

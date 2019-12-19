@@ -11,7 +11,7 @@ SELECT story.writer,
          count(distinct(publisher_id)) AS publishers
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 CROSS JOIN UNNEST(story_script) AS story(writer)
-WHERE snapshot=20191215 AND
+WHERE snapshot = SNAPSHOT_DATE_HERE AND
         story.writer NOT LIKE '%?%' AND story.writer != '' AND
         series_language_code = 'en' AND variant_of_issue_id = 0
 GROUP BY  story.writer

@@ -9,7 +9,7 @@ SELECT i.price,
         count(distinct(issue_id)) as issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 CROSS JOIN UNNEST(price) AS i(price)
-WHERE snapshot = 20191215 AND
+WHERE snapshot = SNAPSHOT_DATE_HERE AND
         i.price LIKE '%USD%' AND
         publication_date > 20190000
 GROUP BY i.price

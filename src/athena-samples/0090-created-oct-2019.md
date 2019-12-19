@@ -10,6 +10,6 @@ SELECT created,
         count(distinct(issue_id)) as issues,
         count(distinct(story_id)) as stories
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot = 20191215 AND created < 20191101 AND created > 20191000
+WHERE snapshot = SNAPSHOT_DATE_HERE AND created < 20191101 AND created > 20191000
 GROUP BY created
 ```

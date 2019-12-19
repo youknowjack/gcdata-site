@@ -26,7 +26,7 @@ class AthenaSampleQuery extends React.Component {
               <a href={"#" + sample.node.frontmatter.position}><span class="link-icon" role="img" aria-label="link icon"/></a>
               </h3>
               <p>{sample.node.frontmatter.blurb}</p>
-              <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
+              <div dangerouslySetInnerHTML={{__html: sample.node.html.replace('SNAPSHOT_DATE_HERE',snapshot)}}/>
               <p><a href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=" + snapshot} target="_blank"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
                 {sample.node.frontmatter.graph &&
