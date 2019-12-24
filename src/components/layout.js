@@ -36,9 +36,24 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <p>
+            <a rel="license noopener noreferrer" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank"
+            ><img alt="Creative Commons License"
+                  style={{borderWidth: 0}} src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+            {` `}
+            <span>Grand Comics Data Analytics</span>
+            {` `}
+            by <a href="https://www.gcdata.org" rel="cc:attributionURL">gcdata.org</a> is licensed under
+            {` `}
+            a <a rel="license noopener noreferrer" href="http://creativecommons.org/licenses/by-sa/4.0/"
+            >Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            {` `}
+            Based on the CC-BY-SA work of <a href="https://www.comics.org" target="_blank" rel="noopener noreferrer"
+            >the Grand Comics Database</a>™.
+          </p>
+          <p>
+            Built with <a href="https://www.gatsbyjs.org" target="_blank" rel="noopener noreferrer">Gatsby</a>.
+          </p>
         </footer>
       </div>
     </>
