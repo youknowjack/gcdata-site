@@ -1,6 +1,6 @@
 ---
 heading: Top English-language writers, by issue count, with series and publisher counts
-blurb: Think Stan Lee is in the top spot? Then I guess you don't know Jack...
+blurb: Stan is the man, but do you know Jack?
 link: query/4/visualization/5?api_key=Y2qX8CQwq0vuwxZXuoQx5dQUX6hi1WcvO20BN1cE&
 position: 10
 ---
@@ -11,7 +11,7 @@ SELECT story.writer,
          count(distinct(publisher_id)) AS publishers
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
 CROSS JOIN UNNEST(story_script) AS story(writer)
-WHERE snapshot=20191215 AND
+WHERE snapshot = SNAPSHOT_DATE_HERE AND
         story.writer NOT LIKE '%?%' AND story.writer != '' AND
         series_language_code = 'en' AND variant_of_issue_id = 0
 GROUP BY  story.writer

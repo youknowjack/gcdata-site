@@ -8,7 +8,7 @@ position: 50
 SELECT page_count,
         count(distinct(issue_id)) as issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot=20191215 AND
+WHERE snapshot = SNAPSHOT_DATE_HERE AND
         series_language_code = 'en' AND
         page_count != 0
 GROUP BY page_count

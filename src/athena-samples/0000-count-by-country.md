@@ -10,7 +10,7 @@ SELECT series_country_code,
          count(distinct(issue_id)) AS issues,
          count(distinct(story_id)) AS stories
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot=20191215
+WHERE snapshot = SNAPSHOT_DATE_HERE
 GROUP BY  series_country_code
 ORDER BY  series DESC
 ```

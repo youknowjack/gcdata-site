@@ -16,6 +16,7 @@ After that, the body should be a Markdown code block (wrapped in <code>```sql</c
 ```
 SELECT <metric(s)>
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot = <snapshot-date> AND <other filter(s)>
+WHERE snapshot = SNAPSHOT_DATE_HERE AND <other filter(s)>
 GROUP BY <dimension(s)>
 ```
+Note that "SNAPSHOT_DATE_HERE" should be used verbatim as shown, it is replaced with an actual snapshot date at render time.

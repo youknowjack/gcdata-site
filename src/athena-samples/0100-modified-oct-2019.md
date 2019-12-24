@@ -10,6 +10,6 @@ SELECT modified,
         count(distinct(issue_id)) as issues,
         count(distinct(story_id)) as stories
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot = 20191215 AND modified < 20191101 AND modified > 20191000
+WHERE snapshot = SNAPSHOT_DATE_HERE AND modified < 20191101 AND modified > 20191000
 GROUP BY modified
 ```

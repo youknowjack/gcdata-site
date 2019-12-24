@@ -11,7 +11,7 @@ SELECT variant_of_issue_id,
          publication_date,
          count(distinct(issue_id)) as issues
 FROM "gcdissuesnapshot"."gcdissuesnapshot"
-WHERE snapshot = 20191215 AND variant_of_issue_id != 0
+WHERE snapshot = SNAPSHOT_DATE_HERE AND variant_of_issue_id != 0
 GROUP BY variant_of_issue_id,
          series_name,
          issue_number_raw,
