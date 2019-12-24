@@ -18,7 +18,8 @@ class AthenaSampleQuery extends React.Component {
           <p>If you would like to run your own queries, email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a> to request
           a Redash account.</p>
           <p>If you notice a problem, please open
-          a <a href="https://github.com/youknowjack/gcd-imhotep/issues/new" target="_blank">Github issue</a> in <code>gcd-imhotep</code> (project name to be changed soon).</p>
+          a <a href="https://github.com/youknowjack/gcd-imhotep/issues/new" target="_blank" rel="noopener noreferrer"
+            >Github issue</a> in <code>gcd-imhotep</code> (project name to be changed soon).</p>
 
           {samples.map(sample => (
             <div id={sample.node.frontmatter.position}>
@@ -28,9 +29,12 @@ class AthenaSampleQuery extends React.Component {
               <p>{sample.node.frontmatter.blurb}</p>
               <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
               <p><a href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=" + snapshot} target="_blank"
+                    rel="noopener noreferrer"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
                 {sample.node.frontmatter.graph &&
-                <span style={{marginLeft: 20}}><a href={sqlurl + sample.node.frontmatter.graph + "&p_snapshot=" + snapshot} target="_blank"
+                <span
+                  style={{marginLeft: 20}}><a href={sqlurl + sample.node.frontmatter.graph + "&p_snapshot=" + snapshot}
+                                              target="_blank" rel="noopener noreferrer"
                 ><span role="img" aria-label="play button">▶️</span> Show Graph</a></span>
                 }
               </p>

@@ -18,11 +18,15 @@ class SampleQuery extends React.Component {
           <p>You are encouraged to use the IQL webapp to try variations these sample queries and come up with new ones. 
           Note that the Imhotep cluster is currently running on a single EC2 t2.micro instance, so performance 
           could be better and occasionally the webapp may become unavailable. If you notice a problem, please open
-          a <a href="https://github.com/youknowjack/gcd-imhotep/issues/new" target="_blank">Github issue</a> in <code>gcd-imhotep</code> or
+          a <a href="https://github.com/youknowjack/gcd-imhotep/issues/new" target="_blank"
+               rel="noopener noreferrer">Github issue</a> in <code>gcd-imhotep</code> or
           email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a>.</p>
           <p>If you find a great new query that we could add to this page, please open
-          a <a href="https://github.com/youknowjack/gcdata-site/issues/new" target="_blank">Github issue</a> in <code>gcdata-site</code>.
-          Pull requests are also welcome -- adding a query is as easy as <a href="https://github.com/youknowjack/gcdata-site/blob/master/src/imhotep-samples/README.md" target="_blank">adding a single Markdown file</a> in the project.</p>
+          a <a href="https://github.com/youknowjack/gcdata-site/issues/new" target="_blank"
+               rel="noopener noreferrer">Github issue</a> in <code>gcdata-site</code>.
+          Pull requests are also welcome -- adding a query is as easy as
+            <a href="https://github.com/youknowjack/gcdata-site/blob/master/src/imhotep-samples/README.md"
+               target="_blank" rel="noopener noreferrer">adding a single Markdown file</a> in the project.</p>
 
           {samples.map(sample => (
             <div id={sample.node.frontmatter.shortlink}>
@@ -31,7 +35,7 @@ class SampleQuery extends React.Component {
               </h3>
               <p>{sample.node.frontmatter.blurb}</p>
               <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
-              <p><a href={iqlurl + sample.node.frontmatter.shortlink} target="_blank"
+              <p><a href={iqlurl + sample.node.frontmatter.shortlink} target="_blank" rel="noopener noreferrer"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
               </p>
             </div>
