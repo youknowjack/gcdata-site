@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
             >the Grand Comics Database</a>™.
           </p>
           <p>
-            Built with <a href="https://www.gatsbyjs.org" target="_blank" rel="noopener noreferrer">Gatsby</a>.
+            This site is built with <a href="https://www.gatsbyjs.org" target="_blank" rel="noopener noreferrer">Gatsby</a>.
           </p>
         </footer>
       </div>
