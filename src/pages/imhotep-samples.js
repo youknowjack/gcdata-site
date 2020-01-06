@@ -24,8 +24,8 @@ class SampleQuery extends React.Component {
           <p>If you find a great new query that we could add to this page, please open
           a <a href="https://github.com/youknowjack/gcdata-site/issues/new" target="_blank"
                rel="noopener noreferrer">Github issue</a> in <code>gcdata-site</code>.
-          Pull requests are also welcome -- adding a query is as easy as
-            <a href="https://github.com/youknowjack/gcdata-site/blob/master/src/imhotep-samples/README.md"
+          Pull requests are also welcome -- adding a query is as easy
+            as <a href="https://github.com/youknowjack/gcdata-site/blob/master/src/imhotep-samples/README.md"
                target="_blank" rel="noopener noreferrer">adding a single Markdown file</a> in the project.</p>
 
           {samples.map(sample => (
