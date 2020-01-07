@@ -8,6 +8,6 @@ position: 60
 FROM gcdissuesnapshot <start-date> <end-date>
 WHERE price=~'.*USD.*'
       publication_date > 20190000
-GROUP BY price[10]
+GROUP BY price
 SELECT distinct(issue_id)
 ```
