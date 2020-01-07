@@ -6,7 +6,7 @@ position: 20
 ---
 ```sql
 FROM gcdissuesnapshot <start-date> <end-date>
-WHERE story_script='Stan Lee'
+WHERE story_script=~'Stan Lee( [\[\(].*)?'
       series_language_code='en' 
       variant_of_issue_id=0
 GROUP BY series_name
