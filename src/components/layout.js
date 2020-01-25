@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
           <p style={{lineHeight: `1.3em`}}>
             <a rel="license noopener noreferrer" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank"
             ><img alt="Creative Commons License"
-                  style={{borderWidth: 0; marginRight: `4px`; float: `left`}}
+                  style={{borderWidth: 0, marginRight: `4px`, float: `left`}}
                   src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
             {` `}
             <span>Grand Comics Data Analytics</span>
