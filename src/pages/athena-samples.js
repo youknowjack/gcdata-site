@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 class AthenaSampleQuery extends React.Component {
   render() {
     const samples = this.props.data.allMarkdownRemark.edges
-    const sqlurl = "http://athena.gcdata.org/embed/";
+    const sqlurl = "https://athena.gcdata.org/embed/";
     const snapshot = 20200115;
 
     return (
