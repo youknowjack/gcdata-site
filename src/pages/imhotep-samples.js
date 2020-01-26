@@ -16,7 +16,7 @@ class SampleQuery extends React.Component {
           date of the GCD data dump. Each link uses dates for the most recent data dump uploaded into Imhotep.
           Read more <a href="/about-imhotep">about Imhotep for GCD.</a></p>
           <p>You are encouraged to use the IQL webapp to try variations these sample queries and come up with new ones. 
-          Note that the Imhotep cluster is currently running on a single EC2 t2.micro instance, so performance 
+          Note that the Imhotep cluster is currently running on a single EC2 t2.small spot instance, so performance 
           could be better and occasionally the webapp may become unavailable. If you notice a problem, please open
           a <a href="https://github.com/youknowjack/gcd-etl/issues/new" target="_blank"
                rel="noopener noreferrer">Github issue</a> in <code>gcd-etl</code> or
