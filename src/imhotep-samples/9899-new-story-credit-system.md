@@ -1,5 +1,5 @@
 ---
-heading: Issue counts by GCD data dump, since 2019-11-01
+heading: Stories tracked in new credit system, since 2020-01-01
 blurb: A new credit tracking system rolled out in 2020; how's that going?
 shortlink: 7HXG3N
 position: 9899
