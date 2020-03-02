@@ -2,7 +2,7 @@
 heading: Stories tracked in new credit system, since 2020-01-01
 blurb: A new credit tracking system rolled out in 2020; how's that going?
 shortlink: 7HXG3N
-graph: DYTY4F
+graph: 28FGCT
 position: 9899
 ---
 ```sql
