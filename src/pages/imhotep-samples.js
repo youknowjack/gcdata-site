@@ -63,6 +63,7 @@ export const sampleQueryQuery = graphql`
           html
           frontmatter {
             shortlink
+            graph
             heading
             blurb
             position
