@@ -37,7 +37,6 @@ class SampleQuery extends React.Component {
               <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
               <p><a href={iqlurl + sample.node.frontmatter.shortlink} target="_blank" rel="noopener noreferrer"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
-              </p>
                 {sample.node.frontmatter.graph &&
                 <span
                   style={{marginLeft: 20}}><a href={iqlurl + sample.node.frontmatter.graph} target="_blank" rel="noopener noreferrer"
