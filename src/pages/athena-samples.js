@@ -6,7 +6,7 @@ class AthenaSampleQuery extends React.Component {
   render() {
     const samples = this.props.data.allMarkdownRemark.edges
     const sqlurl = "https://athena.gcdata.org/embed/";
-    const snapshot = 20200801;
+    const snapshot = 20200815;
 
     return (
       <Layout>
