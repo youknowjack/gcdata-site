@@ -17,7 +17,7 @@ class RedashSampleQuery extends React.Component {
           date of the GCD data dump.</p>
           <p>If you would like to run your own queries, email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a> to request
           a Redash account.</p>
-          <p>More information about the <code>gcdissuesnapshot</code> schema can be found on the <Link to="/about-redash/">About Redash</a> page.
+          <p>More information about the <code>gcdissuesnapshot</code> schema can be found on the <a href="/about-redash/">About Redash</a> page.</p>
           <p>If you notice a problem, please open
           a <a href="https://github.com/youknowjack/gcd-etl/issues/new" target="_blank" rel="noopener noreferrer"
             >Github issue</a> in <code>gcd-etl</code>.</p>
