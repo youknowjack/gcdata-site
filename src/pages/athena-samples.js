@@ -12,20 +12,14 @@ class AthenaSampleQuery extends React.Component {
       <Layout>
         <div className="doc-content">
           <h1>Sample Athena Queries</h1>
-          <p><b>DEPRECATED</b></p>
+          <div class="notice">
+          <h3>Deprecation Notice</h3>
           <p>Previously, we used Athena in AWS as the query engine for the denormalized table with snapshot partitions stored in S3.
           The queries on this page used to point to an AWS-hosted Redash instance that was the query front-end in front of Athena.
           We have now migrated to a self-hosted stack with open-source Presto as the query engine in front of Hive/HDFS. The queries
-          below are still basically correct, but the links now redirect to the equivalent queries on the new Redash instance. The
-          <a href="/redash-samples">Sample Redash Queries</a> page now supercedes this page.</p>
-          <p>Each sample query below includes the SQL along with a link to run the query on Athena
-          via a Redash front-end. In each query, the <code>snapshot=</code> filter in the WHERE clause references the
-          date of the GCD data dump.</p>
-          <p>If you would like to run your own queries, email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a> to request
-          a Redash account.</p>
-          <p>If you notice a problem, please open
-          a <a href="https://github.com/youknowjack/gcd-etl/issues/new" target="_blank" rel="noopener noreferrer"
-            >Github issue</a> in <code>gcd-etl</code>.</p>
+          below are still basically correct, but the links now redirect to the equivalent queries on the new Redash instance.</p>
+          <p>The <a href="/redash-samples">Sample Redash Queries</a> page now supercedes this page.</p>
+          </div>
 
           {samples.map(sample => (
             <div id={sample.node.frontmatter.position}>

@@ -448,6 +448,19 @@ blockquote {
   padding-top: 0;
   margin-bottom: 1.45rem;
 }
+div.notice {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #FFEE33;
+  color: #333333;
+  border: solid 2px black;
+}
 form {
   margin-left: 0;
   margin-right: 0;
