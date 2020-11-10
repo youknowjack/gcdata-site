@@ -22,6 +22,7 @@ const IndexPage = () => (
     possible with Imhotep.</p>
     <p>You can peruse the equivalent <Link to="/imhotep-samples">sample queries for Imhotep</Link>, in the SQL-like
     Imhotep Query Language (IQL).</p></div>
+    <p><i>Note that there is no longer an active Imhotep cluster serving this data.</i></p>
   </Layout>
 )
 

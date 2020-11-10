@@ -5,7 +5,6 @@ import Layout from "../components/layout"
 class SampleQuery extends React.Component {
   render() {
     const samples = this.props.data.allMarkdownRemark.edges
-    const iqlurl = "https://imhotep.gcdata.org/iql/q/";
 
     return (
       <Layout>
@@ -35,14 +34,7 @@ class SampleQuery extends React.Component {
               </h3>
               <p>{sample.node.frontmatter.blurb}</p>
               <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
-              <p><a href={iqlurl + sample.node.frontmatter.shortlink} target="_blank" rel="noopener noreferrer"
-                ><span role="img" aria-label="play button">▶️</span> Run Query</a>
-                {sample.node.frontmatter.graph &&
-                <span
-                  style={{marginLeft: 20}}><a href={iqlurl + sample.node.frontmatter.graph} target="_blank" rel="noopener noreferrer"
-                ><span role="img" aria-label="play button">▶️</span> Show Graph</a></span>
-                }
-              </p>
+              <p></p>
             </div>
           ))}
         </div>
