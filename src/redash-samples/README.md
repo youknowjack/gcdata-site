@@ -15,7 +15,7 @@ position: <next unused position number>
 After that, the body should be a Markdown code block (wrapped in <code>```sql</code>) that follows this pattern: 
 ```
 SELECT <metric(s)>
-FROM "gcd"."gcdissuesnapshot"
+FROM gcd.gcdissuesnapshot
 WHERE snapshot = SNAPSHOT_DATE_HERE AND <other filter(s)>
 GROUP BY <dimension(s)>
 ```

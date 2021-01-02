@@ -1,7 +1,7 @@
 ---
 heading: Top artists, by issue count, with series and publisher counts
 blurb: Jack Kirby went through a lot of pencils in his lifetime!
-link: query/10/visualization/10?api_key=0CSqpOVFZwy0fQeNKwXc5YEnDpnq8slIXrF7J9MN
+link: query/5/visualization/5?api_key=cegyJTLBnZFSaC9m6Z4ckNndB34mHQwYHqmb9A0U
 position: 30
 ---
 ```sql
