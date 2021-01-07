@@ -27,7 +27,7 @@ class RedashSampleQuery extends React.Component {
               <h3>{sample.node.frontmatter.heading}
               <a href={"#" + sample.node.frontmatter.position}><span class="link-icon" role="img" aria-label="link icon"/></a>
               </h3>
-              <p>{sample.node.frontmatter.blurb}</p>
+              <p dangerouslySetInnerHTML={{__html: sample.node.frontmatter.blurb}}></p>
               <div dangerouslySetInnerHTML={{__html: sample.node.html.replace('SNAPSHOT_DATE_HERE',snapshot)}}/>
               <p><a href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=" + snapshot} target="_blank"
                     rel="noopener noreferrer"

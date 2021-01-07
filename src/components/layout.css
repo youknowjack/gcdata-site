@@ -648,4 +648,6 @@ pre tt:after {
 .link-icon:after {
   content: "🔗";
 }
-
+.note {
+  font-size: 0.85rem;
+}
