@@ -1,7 +1,7 @@
 ---
 heading: GCD issue entries modified in October 2019, with series, issue, story counts
 blurb: Over 50,000 issues were modified in this month alone!
-link: query/12/visualization/12?api_key=KI0F6xAV3edGRGDB68hd4YNnrzKoAivQCWXGGVye
+link: query/21/visualization/21?api_key=p4lPVRSFlpi1EVhrm70LcPOmT06osZO137Daj9NE
 position: 100
 ---
 ```sql

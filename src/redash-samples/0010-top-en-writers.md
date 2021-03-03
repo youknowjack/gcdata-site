@@ -1,7 +1,7 @@
 ---
 heading: Top English-language writers, by issue count, with series and publisher counts
 blurb: Stan is the man, but do you know Jack?
-link: query/3/visualization/3?api_key=Q7j3oRZgL0SrDawEw73ZVNIqjo3Gsb913hpmparE
+link: query/11/visualization/11?api_key=Y2qX8CQwq0vuwxZXuoQx5dQUX6hi1WcvO20BN1cE&
 position: 10
 ---
 ```sql

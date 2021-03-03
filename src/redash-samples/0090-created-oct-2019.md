@@ -1,7 +1,7 @@
 ---
 heading: GCD issue entries created in October 2019, with series, issue, story counts
 blurb: Check out 10/29! It was a busy day.
-link: query/11/visualization/11?api_key=X3Hot6x8aVEXpYy66PAd8PIg8QAdTsteE9p0DzBx
+link: query/19/visualization/19?api_key=eJiRlN32jCZVFUXQhcXFY2SBgMQSMQRImftssNnk
 position: 90
 ---
 ```sql

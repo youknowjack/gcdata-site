@@ -1,7 +1,7 @@
 ---
 heading: Series by Stan Lee, with issue counts
 blurb: Stan did write a LOT of comics!
-link: query/4/visualization/4?api_key=mopNZaejdtJLz1gJryPof4QqC8qGkTXaSwyGZuOK
+link: query/14/visualization/14?api_key=oqs6j57jTR8W0MYr2za2z40AKXWYhOHkP3k1Aqhn
 position: 20
 ---
 ```sql

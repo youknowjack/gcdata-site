@@ -1,7 +1,7 @@
 ---
 heading: Issues with greatest number of variants published
 blurb: Spider-Man, Batman, and Godzilla take the top spots.
-link: query/9/visualization/9?api_key=cNpwtG0kQ4TkpO2QHs0CLhZmbgitGGNo44eVLAmR
+link: query/17/visualization/17?api_key=ytKIY01ROHDxFM6gLYsSsyftAccDoeMRmuo81coP
 position: 70
 ---
 ```sql

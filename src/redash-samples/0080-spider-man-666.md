@@ -1,7 +1,7 @@
 ---
 heading: Variants of The Amazing Spider-Man 666
 blurb: Face it, Tiger... you just hit the jackpot!
-link: query/10/visualization/10?api_key=gHhZlcjkiBBHnZedFmxCcItVARGT78GAMKSEUXeJ
+link: query/20/visualization/20?api_key=HkfYZdZ1pTmnauDRErqQoHDigTCGKELGzyM2jZdh
 position: 80
 ---
 ```sql

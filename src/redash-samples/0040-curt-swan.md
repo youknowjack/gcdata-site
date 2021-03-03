@@ -1,7 +1,7 @@
 ---
 heading: Series drawn by Curt Swan, with issue counts
 blurb: Curt drew that iconic "S" more than maybe anyone.
-link: query/6/visualization/6?api_key=rOfCHlvmBXl1Pgh6YYPgqSFjZ30E8rK7ncSt0vha
+link: query/12/visualization/12?api_key=wDP7pjPhD4s8p9Zu9VT9K7DdGZXxgZtpxrodHxtQ
 position: 40
 ---
 ```sql

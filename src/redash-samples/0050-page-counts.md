@@ -1,7 +1,7 @@
 ---
 heading: Most common page counts for English-language comics
 blurb: The ubiquitous 36-pager takes the top spot. Number 3 may surprise you!
-link: query/7/visualization/7?api_key=xxJ73pdularzd1ssJ00v0hVzc0kGejXHtKp1yCGx
+link: query/13/visualization/13?api_key=KwXy5dPATb5Xjs7ooZRXBhg0HUSX5G7947PezyHa
 position: 50
 ---
 ```sql

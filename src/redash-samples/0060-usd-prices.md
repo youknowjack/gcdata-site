@@ -1,7 +1,7 @@
 ---
 heading: Most common US dollar prices for comics published since 2019
 blurb: Remember when comics were a nickel? Me neither.
-link: query/8/visualization/8?api_key=MH0qAqnG2jJ1jsSD3fk6Y8pdoSgdBLcNPDHEyaE8
+link: query/18/visualization/18?api_key=TVV9RzcUBOCNMV9o69aYtdhz0VSOc3uKm4AhzDCY
 position: 60
 ---
 ```sql
