@@ -29,7 +29,8 @@ class RedashSampleQuery extends React.Component {
               </h3>
               <p dangerouslySetInnerHTML={{__html: sample.node.frontmatter.blurb}}></p>
               <div dangerouslySetInnerHTML={{__html: sample.node.html.replace('SNAPSHOT_DATE_HERE',snapshot)}}/>
-              <p><a href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=" + snapshot} target="_blank"
+              <p><a class="mixpanel-track" id={"click-" + sample.node.frontmatter.position} data-mptrack-prefix="sample-query"
+                    href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=" + snapshot} target="_blank"
                     rel="noopener noreferrer"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
                 {sample.node.frontmatter.graph &&
