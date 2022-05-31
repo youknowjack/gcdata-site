@@ -1,7 +1,7 @@
 ---
 heading: Average US dollar issue prices for 36-page comics published since 1970
 blurb: Production of 36-page comics peaked in 1994, when the average price was $2.12 USD.
-link: query/29/visualization/34?api_key=TVV9RzcUBOCNMV9o69aYtdhz0VSOc3uKm4AhzDCY
+link: query/29/visualization/35?api_key=TVV9RzcUBOCNMV9o69aYtdhz0VSOc3uKm4AhzDCY
 graph: query/29/visualization/35?api_key=TVV9RzcUBOCNMV9o69aYtdhz0VSOc3uKm4AhzDCY
 position: 64
 ---
