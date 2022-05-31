@@ -11,7 +11,7 @@ SELECT CAST(FLOOR(publication_date/10000) as varchar) as year,
         count(1) as unique_issue_count
 FROM gcd.gcdissuesnapshot
 CROSS JOIN UNNEST(price) AS i(price)
-WHERE snapshot = {{ snapshot }} AND
+WHERE snapshot = SNAPSHOT_DATE_HERE AND
         series_language_code = 'en' AND
         series_country_code = 'us' AND
         page_count = 36 AND
