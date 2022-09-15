@@ -13,6 +13,7 @@ export default function HTML(props) {
         />
         {props.headComponents}
         <script type="text/javascript" src={'/mixpanel.js'}/>
+        <script src="https://gcdata-current-version.pages.dev/current-snapshot.js"/>
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
