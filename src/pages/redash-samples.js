@@ -6,6 +6,7 @@ class RedashSampleQuery extends React.Component {
   render() {
     const samples = this.props.data.allMarkdownRemark.edges
     const sqlurl = "https://redash.gcdata.org/embed/";
+    const snapshot = 20221001;
 
     return (
       <Layout>
@@ -27,14 +28,14 @@ class RedashSampleQuery extends React.Component {
               <a href={"#" + sample.node.frontmatter.position}><span class="link-icon" role="img" aria-label="link icon"/></a>
               </h3>
               <p dangerouslySetInnerHTML={{__html: sample.node.frontmatter.blurb}}></p>
-              <div dangerouslySetInnerHTML={{__html: sample.node.html}}/>
+              <div dangerouslySetInnerHTML={{__html: sample.node.html.replace('SNAPSHOT_DATE_HERE',snapshot)}}/>
               <p><a class="mixpanel-track" id={"click-" + sample.node.frontmatter.position} data-mptrack-prefix="sample-query"
-                    href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=SNAPSHOT_DATE_HERE"} target="_blank"
+                    href={sqlurl + sample.node.frontmatter.link + "&p_snapshot=" + snapshot} target="_blank"
                     rel="noopener noreferrer"
                 ><span role="img" aria-label="play button">▶️</span> Run Query</a>
                 {sample.node.frontmatter.graph &&
                 <span
-                  style={{marginLeft: 20}}><a href={sqlurl + sample.node.frontmatter.graph + "&p_snapshot=SNAPSHOT_DATE_HERE"}
+                  style={{marginLeft: 20}}><a href={sqlurl + sample.node.frontmatter.graph + "&p_snapshot=" + snapshot}
                                               target="_blank" rel="noopener noreferrer"
                 ><span role="img" aria-label="play button">▶️</span> Show Graph</a></span>
                 }
