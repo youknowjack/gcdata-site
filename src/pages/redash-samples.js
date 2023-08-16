@@ -6,7 +6,7 @@ class RedashSampleQuery extends React.Component {
   render() {
     const samples = this.props.data.allMarkdownRemark.edges
     const sqlurl = "https://redash.gcdata.org/embed/";
-    const snapshot = 20230801;
+    const snapshot = 20230815;
 
     return (
       <Layout>
