@@ -2,7 +2,7 @@
 heading: Counts of series, issues, and stories, by country code
 blurb: Did you know that 59% of series in GCD are from outside the United States?
 link: query/15/visualization/15?api_key=X2eAZDiEF7QwWDk0fK7LFukhOgVxjtJldHWIovAk
-position: 0
+position: 1
 ---
 ```sql
 SELECT series_country_code,
