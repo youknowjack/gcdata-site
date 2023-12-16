@@ -1,6 +1,6 @@
 ---
 heading: Most common page counts for English-language comics
-blurb: The ubiquitous 36-pager takes the top spot. Number 3 may surprise you!
+blurb: The ubiquitous 36-pager takes the top spot. Number 3 may surprise you!<br/><br/><span class="note">You can change the series <b>language</b> using the drop-down.</span>
 link: query/13/visualization/13?api_key=KwXy5dPATb5Xjs7ooZRXBhg0HUSX5G7947PezyHa
 position: 50
 ---
