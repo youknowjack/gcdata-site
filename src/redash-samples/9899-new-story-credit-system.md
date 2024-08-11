@@ -9,7 +9,7 @@ position: 9899
 SELECT snapshot, count(distinct(story_id)) as stories
 FROM gcd.gcdissuesnapshot
 WHERE snapshot >= 20200101 AND story_credit_source='gcd_story_credit'
-      AND snapshot % 10000 IN (101, 301, 501, 701, 901, 1101)
+      AND snapshot % 10000 IN (201, 401, 601, 801, 1001, 1201)
 GROUP BY snapshot
 ORDER BY snapshot DESC
 ```
