@@ -9,7 +9,7 @@ position: 9999
 SELECT snapshot,
         count(distinct(issue_id)) as issues
 FROM gcd.gcdissuesnapshot
-WHERE snapshot % 10000 IN (315, 615, 915, 1215)
+WHERE snapshot % 10000 IN (115, 415, 715, 1015)
       AND variant_of_issue_id = 0 
       AND series_is_comics_publication = true
 GROUP BY snapshot
