@@ -1,0 +1,41 @@
+---
+layout: base.njk
+title: "Sample Redash SQL Queries"
+permalink: /redash-samples/
+---
+
+<div class="doc-content">
+  <h1>Sample Redash SQL Queries</h1>
+  <p>Each sample query below includes the SQL along with a link to run the query on our
+  Redash front-end. In each query, the <code>snapshot=</code> filter in the WHERE clause references the
+  date of the GCD data dump.</p>
+  <p>If you would like to run your own queries, email <a href="https://mailhide.io/e/T8xal" onclick="mailhidepopup=window.open('https://mailhide.io/e/T8xal','mailhidepopup','width=580,height=635'); return false;">a......@gcdata.org</a> to request
+  a Redash account.</p>
+  <p>More information about the <code>gcdissuesnapshot</code> schema can be found on the <a href="/about-redash/">About Redash</a> page.</p>
+  <p>If you notice a problem, please open
+  a <a href="https://github.com/youknowjack/gcd-etl/issues/new" target="_blank" rel="noopener noreferrer">Github issue</a> in <code>gcd-etl</code>.</p>
+
+  {% set sqlurl = "https://redash.gcdata.org/embed/" %}
+  {% for sample in collections.redashSamples %}
+  <div id="{{ sample.data.position }}">
+    <h3>{{ sample.data.heading }}
+    <a href="#{{ sample.data.position }}"><span class="link-icon" role="img" aria-label="link icon"></span></a>
+    </h3>
+    <p>{{ sample.data.blurb | safe }}</p>
+    <div>{{ sample.templateContent | replaceSnapshot(snapshot) | safe }}</div>
+    <p>
+      <a class="mixpanel-track" id="click-{{ sample.data.position }}" data-mptrack-prefix="sample-query"
+         href="{{ sqlurl }}{{ sample.data.link }}&p_snapshot={{ snapshot }}" target="_blank" rel="noopener noreferrer">
+        <span role="img" aria-label="play button">&#9654;&#65039;</span> Run Query
+      </a>
+      {% if sample.data.graph %}
+      <span style="margin-left: 20px;">
+        <a href="{{ sqlurl }}{{ sample.data.graph }}&p_snapshot={{ snapshot }}" target="_blank" rel="noopener noreferrer">
+          <span role="img" aria-label="play button">&#9654;&#65039;</span> Show Graph
+        </a>
+      </span>
+      {% endif %}
+    </p>
+  </div>
+  {% endfor %}
+</div>

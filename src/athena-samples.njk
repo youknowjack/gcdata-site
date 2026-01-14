@@ -1,0 +1,41 @@
+---
+layout: base.njk
+title: "Sample Athena Queries"
+permalink: /athena-samples/
+---
+
+<div class="doc-content">
+  <h1>Sample Athena Queries</h1>
+  <div class="notice">
+    <h3>Deprecation Notice</h3>
+    <p>Previously, we used Athena in AWS as the query engine for the denormalized table with snapshot partitions stored in S3.
+    The queries on this page used to point to an AWS-hosted Redash instance that was the query front-end in front of Athena.
+    We have now migrated to a self-hosted stack with open-source Presto as the query engine in front of Hive/HDFS. The queries
+    below are still basically correct, but the links now redirect to the equivalent queries on the new Redash instance.</p>
+    <p>The <a href="/redash-samples/">Sample Redash Queries</a> page now supercedes this page.</p>
+  </div>
+
+  {% set sqlurl = "https://athena.gcdata.org/embed/" %}
+  {% set athenaSnapshot = 20200815 %}
+  {% for sample in collections.athenaSamples %}
+  <div id="{{ sample.data.position }}">
+    <h3>{{ sample.data.heading }}
+    <a href="#{{ sample.data.position }}"><span class="link-icon" role="img" aria-label="link icon"></span></a>
+    </h3>
+    <p>{{ sample.data.blurb }}</p>
+    <div>{{ sample.templateContent | replaceSnapshot(athenaSnapshot) | safe }}</div>
+    <p>
+      <a href="{{ sqlurl }}{{ sample.data.link }}&p_snapshot={{ athenaSnapshot }}" target="_blank" rel="noopener noreferrer">
+        <span role="img" aria-label="play button">&#9654;&#65039;</span> Run Query
+      </a>
+      {% if sample.data.graph %}
+      <span style="margin-left: 20px;">
+        <a href="{{ sqlurl }}{{ sample.data.graph }}&p_snapshot={{ athenaSnapshot }}" target="_blank" rel="noopener noreferrer">
+          <span role="img" aria-label="play button">&#9654;&#65039;</span> Show Graph
+        </a>
+      </span>
+      {% endif %}
+    </p>
+  </div>
+  {% endfor %}
+</div>

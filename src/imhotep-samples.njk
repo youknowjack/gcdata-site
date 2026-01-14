@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: "Sample Imhotep Queries"
+permalink: /imhotep-samples/
+---
+
+<div class="doc-content">
+  <h1>Sample Imhotep Queries</h1>
+  <p>The GCD Imhotep cluster is not currently available. The queries below
+  illustrate the IQL versions of the <a href="/redash-samples/" rel="noopener noreferrer">Presto
+  SQL queries</a> served via Redash. In each query, <code>&lt;start-date&gt;</code> and
+  <code>&lt;end-date&gt;</code> reference the date of the GCD data dump. Each link uses dates for the most
+  recent data dump that would be uploaded to and available via Imhotep.</p>
+
+  {% for sample in collections.imhotepSamples %}
+  <div id="{{ sample.data.shortlink }}">
+    <h3>{{ sample.data.heading }}
+    <a href="#{{ sample.data.shortlink }}"><span class="link-icon" role="img" aria-label="link icon"></span></a>
+    </h3>
+    <p>{{ sample.data.blurb }}</p>
+    <div>{{ sample.templateContent | safe }}</div>
+    <p></p>
+  </div>
+  {% endfor %}
+</div>
