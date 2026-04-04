@@ -1,4 +1,4 @@
-Kim const markdownIt = require("markdown-it");
+const markdownIt = require("markdown-it");
 const markdownItPrism = require("markdown-it-prism");
 
 module.exports = function(eleventyConfig) {
