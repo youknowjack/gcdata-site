@@ -24,7 +24,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.setLibrary("md", md);
 
   // Global data for snapshot date (used in queries)
-  eleventyConfig.addGlobalData("snapshot", 20260601);
+  eleventyConfig.addGlobalData("snapshot", 20260801);
 
   // Filter to replace SNAPSHOT_DATE_HERE placeholder
   eleventyConfig.addFilter("replaceSnapshot", function(content, snapshot) {
