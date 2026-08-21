@@ -10,8 +10,8 @@
     "clean": "rm -rf public"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "markdown-it": "^14.1.0",
+    "@11ty/eleventy": "^3.1.6",
+    "markdown-it": "^14.2.0",
     "markdown-it-prism": "^2.3.0",
     "prismjs": "^1.29.0"
   }
