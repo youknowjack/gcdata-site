@@ -21,4 +21,4 @@ SELECT decade, rank, writer, issues FROM (
 )
 WHERE rank <= 1 AND decade >= 1900 AND decade <= 2020
 ORDER BY decade DESC, rank
-``
+```
