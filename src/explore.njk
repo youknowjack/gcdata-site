@@ -1,0 +1,403 @@
+---
+layout: base.njk
+title: "Explore GCD Data — SQL Editor"
+description: "Interactive SQL editor for the Grand Comics Database — runs entirely in your browser via DuckDB WASM"
+---
+
+<style>
+  #explore-wrap {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-top: 12px;
+  }
+  #schema-panel {
+    width: 220px;
+    flex-shrink: 0;
+    font-size: 13px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  #schema-panel h4 { margin: 0 0 6px; font-size: 13px; }
+  #schema-panel .col-name {
+    font-family: monospace;
+    font-size: 11px;
+    padding: 1px 0;
+    color: #444;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #main-panel { flex: 1; min-width: 0; }
+  @media (max-width: 600px) {
+    #explore-wrap { flex-direction: column; }
+    #schema-panel { width: 100%; max-height: 200px; order: 2; }
+    #main-panel { order: 1; width: 100%; }
+    #sql-editor { width: 100%; box-sizing: border-box; }
+  }
+  #sql-editor {
+    width: 100%;
+    height: 252px;
+    font-family: monospace;
+    font-size: 13px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  #run-btn {
+    margin-top: 8px;
+    padding: 6px 18px;
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  #run-btn:disabled { background: #999; cursor: default; }
+  #status { margin-top: 6px; font-size: 13px; color: #666; min-height: 20px; }
+  #results-wrap { margin-top: 12px; overflow-x: auto; max-height: 400px; overflow-y: auto; }
+  #results-wrap table { border-collapse: collapse; font-size: 12px; width: 100%; }
+  #results-wrap th { background: #f0f0f0; padding: 4px 8px; border: 1px solid #ccc; text-align: left; position: sticky; top: 0; }
+  #results-wrap td { padding: 3px 8px; border: 1px solid #e0e0e0; white-space: nowrap; max-width: 300px; overflow: hidden; text-overflow: ellipsis; }
+  #results-wrap tr:nth-child(even) td { background: #fafafa; }
+  #sample-select { margin: 0 0 8px; font-size: 13px; padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; }
+  #loading-msg { color: #888; font-style: italic; }
+  #main-panel { position: relative; }
+  #spinner-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  #spinner-overlay.active { display: flex; }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 4px solid #ddd;
+    border-top-color: #66E;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #error-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  #error-modal.active { display: flex; }
+  #error-modal-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px 28px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    text-align: center;
+  }
+  #error-modal-icon { font-size: 2.5em; margin-bottom: 10px; }
+  #error-modal-msg { font-size: 14px; color: #333; margin-bottom: 18px; line-height: 1.5; }
+  #error-modal-close {
+    padding: 7px 22px;
+    background: #66E;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .conn-warn {
+    display: none;
+    background: #fff8e1;
+    border: 1px solid #f0c040;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .conn-warn button { float: right; background: none; border: none; cursor: pointer; font-size: 16px; line-height: 1; color: #888; margin-left: 8px; }
+</style>
+
+<div id="error-modal" onclick="if(event.target===this)this.classList.remove('active')">
+  <div id="error-modal-box">
+    <div id="error-modal-icon">🚫</div>
+    <div id="error-modal-msg"></div>
+    <button id="error-modal-close" onclick="document.getElementById('error-modal').classList.remove('active')">Dismiss</button>
+  </div>
+</div>
+
+<div id="warn-cellular" class="conn-warn">
+  <button onclick="this.parentElement.style.display='none'" title="Dismiss">✕</button>
+  ⚠️ You appear to be on a cellular connection. Queries may download tens of MB of data.
+</div>
+<div id="warn-mobile" class="conn-warn">
+  <button onclick="this.parentElement.style.display='none'" title="Dismiss">✕</button>
+  ⚠️ You're on a mobile browser — if you're not on WiFi, queries may download tens of MB of data.
+</div>
+
+<h1>Explore GCD Data <span style="font-size:0.5em;vertical-align:middle;background:#66E;color:#fff;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:0.05em">NEW</span></h1>
+<p>Explore the {{ snapshot }} GCD snapshot with your own SQL or one of our example queries.</p>
+<p style="font-size:0.85em">Powered by <a href="https://duckdb.org/docs/api/wasm/overview" target="_blank" rel="noopener">DuckDB WASM</a>. Subsets of Parquet data are downloaded directly and the query runs entirely in your browser!</p>
+
+<div id="loading-msg">Loading DuckDB WASM… (first load ~5 MB)</div>
+
+<div id="explore-wrap" style="display:none">
+  <div id="schema-panel">
+    <h4>gcdissuesnapshot</h4>
+    <div id="schema-cols"><em>loading…</em></div>
+  </div>
+  <div id="main-panel">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <label for="sample-select" style="font-size:13px;color:#555;white-space:nowrap">Example query:</label>
+      <select id="sample-select" style="flex:1"></select>
+    </div>
+    <textarea id="sql-editor" spellcheck="false"></textarea>
+    <div>
+      <button id="run-btn">▶ Run</button>
+      <span style="font-size:12px;color:#888;margin-left:10px">Shift+Enter to run</span>
+    </div>
+    <div id="spinner-overlay"><div class="spinner"></div></div>
+    <div id="status"></div>
+    <div id="results-wrap"></div>
+  </div>
+</div>
+
+<script type="module">
+const SNAPSHOT = {{ snapshot }};
+const S3_BASE = `https://parquet.gcdata.org/snapshot=${SNAPSHOT}`;
+const PART_FILES = [
+  `${S3_BASE}/part-0000.parquet`,
+  `${S3_BASE}/part-0001.parquet`,
+  `${S3_BASE}/part-0002.parquet`,
+  `${S3_BASE}/part-0003.parquet`,
+];
+
+const SAMPLES = [
+  {
+    label: "Top publishers",
+    sql: `SELECT publisher_name, COUNT(DISTINCT issue_id) AS issues
+FROM gcdissuesnapshot
+WHERE snapshot = ${SNAPSHOT}
+  AND variant_of_issue_id = 0
+GROUP BY publisher_name
+ORDER BY issues DESC
+LIMIT 20`
+  },
+  {
+    label: "Top writers",
+    sql: `SELECT name, COUNT(DISTINCT story_id) AS stories
+FROM gcdissuesnapshot
+CROSS JOIN UNNEST(story_script) AS t(name)
+WHERE snapshot = ${SNAPSHOT}
+  AND name NOT IN ('', '[unknown]', '[various]', '[none]', 'various')
+  AND name NOT LIKE '?%'
+GROUP BY name
+ORDER BY stories DESC
+LIMIT 20`
+  },
+  {
+    label: "Issues by country & year",
+    sql: `SELECT series_country_code,
+       publication_date // 10000 AS year,
+       COUNT(DISTINCT issue_id) AS issues
+FROM gcdissuesnapshot
+WHERE snapshot = ${SNAPSHOT}
+  AND variant_of_issue_id = 0
+  AND publication_date BETWEEN 19500000 AND 20261231
+GROUP BY series_country_code, year
+ORDER BY year DESC, issues DESC
+LIMIT 30`
+  },
+  {
+    label: "Most prolific pencillers",
+    sql: `SELECT name, COUNT(DISTINCT story_id) AS stories
+FROM gcdissuesnapshot
+CROSS JOIN UNNEST(story_pencils) AS t(name)
+WHERE snapshot = ${SNAPSHOT}
+  AND name NOT IN ('', '[unknown]', '[various]', '[none]', 'various')
+  AND name NOT LIKE '?%'
+GROUP BY name
+ORDER BY stories DESC
+LIMIT 20`
+  },
+  {
+    label: "Series with most issues",
+    sql: `SELECT series_name, publisher_name,
+       COUNT(DISTINCT issue_id) AS issues
+FROM gcdissuesnapshot
+WHERE snapshot = ${SNAPSHOT}
+  AND variant_of_issue_id = 0
+GROUP BY series_name, publisher_name
+ORDER BY issues DESC
+LIMIT 20`
+  },
+];
+
+const JSDELIVR_BUNDLES = {
+  mvp: {
+    mainModule: "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/dist/duckdb-mvp.wasm",
+    mainWorker: "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/dist/duckdb-browser-mvp.worker.js",
+  },
+  eh: {
+    mainModule: "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/dist/duckdb-eh.wasm",
+    mainWorker: "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/dist/duckdb-browser-eh.worker.js",
+  },
+};
+
+async function init() {
+  const duckdb = await import("https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm");
+  const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
+
+  const workerUrl = URL.createObjectURL(
+    new Blob([`importScripts("${bundle.mainWorker}");`], { type: "text/javascript" })
+  );
+  const worker = new Worker(workerUrl);
+  const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), worker);
+  await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+
+  const conn = await db.connect();
+
+  // Install and load httpfs for S3/HTTP Parquet access
+  await conn.query(`INSTALL httpfs; LOAD httpfs;`);
+
+  setStatus("Registering Parquet files…");
+  const fileList = PART_FILES.map(u => `'${u}'`).join(", ");
+  await conn.query(`
+    CREATE VIEW gcdissuesnapshot AS
+    SELECT * FROM read_parquet([${fileList}], union_by_name = true)
+  `);
+
+  // Load schema for sidebar
+  const schema = await conn.query(`DESCRIBE SELECT * FROM gcdissuesnapshot LIMIT 0`);
+  const colsEl = document.getElementById("schema-cols");
+  colsEl.innerHTML = "";
+  for (const row of schema.toArray()) {
+    const d = document.createElement("div");
+    d.className = "col-name";
+    d.title = `${row.column_name} (${row.column_type})`;
+    d.textContent = row.column_name;
+    colsEl.appendChild(d);
+  }
+
+  // Wire up sample dropdown
+  const selectEl = document.getElementById("sample-select");
+  for (let i = 0; i < SAMPLES.length; i++) {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = SAMPLES[i].label;
+    selectEl.appendChild(opt);
+  }
+  selectEl.onchange = () => {
+    document.getElementById("sql-editor").value = SAMPLES[selectEl.value].sql;
+  };
+
+  // Set default query
+  document.getElementById("sql-editor").value = SAMPLES[0].sql;
+
+  document.getElementById("loading-msg").style.display = "none";
+  document.getElementById("explore-wrap").style.display = "flex";
+  setStatus("Ready — " + SNAPSHOT.toString().slice(0,4) + "-" + SNAPSHOT.toString().slice(4,6) + "-" + SNAPSHOT.toString().slice(6) + " snapshot");
+
+  // Run button
+  document.getElementById("run-btn").onclick = () => runQuery(conn);
+  document.getElementById("sql-editor").addEventListener("keydown", e => {
+    if (e.key === "Enter" && e.shiftKey) { e.preventDefault(); runQuery(conn); }
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") document.getElementById("error-modal").classList.remove("active");
+  });
+
+  return conn;
+}
+
+async function runQuery(conn) {
+  const sql = document.getElementById("sql-editor").value.trim();
+  if (!sql) return;
+  if (/\bSELECT\s+(DISTINCT\s+)?\*/i.test(sql)) {
+    showError("SELECT * is not allowed — full-column queries would require downloading the entire dataset (over 300 MB) to your browser. Select specific columns instead.");
+    return;
+  }
+  const btn = document.getElementById("run-btn");
+  btn.disabled = true;
+  document.getElementById("spinner-overlay").classList.add("active");
+  setStatus("Running…");
+  document.getElementById("results-wrap").innerHTML = "";
+  const t0 = Date.now();
+  try {
+    const result = await conn.query(sql);
+    const rows = result.toArray();
+    const fields = result.schema.fields;
+    const elapsed = ((Date.now() - t0) / 1000).toFixed(2);
+    setStatus(`${rows.length.toLocaleString()} rows — ${elapsed}s`);
+    renderTable(fields, rows);
+    if (rows.length) {
+      const wrap = document.getElementById("results-wrap");
+      wrap.scrollTop = 0;
+      wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  } catch (err) {
+    setStatus("Error: " + err.message);
+  } finally {
+    btn.disabled = false;
+    document.getElementById("spinner-overlay").classList.remove("active");
+  }
+}
+
+
+function renderTable(fields, rows) {
+  if (!rows.length) {
+    document.getElementById("results-wrap").innerHTML = "<em>No results.</em>";
+    return;
+  }
+  const table = document.createElement("table");
+  const thead = table.createTHead();
+  const hr = thead.insertRow();
+  for (const f of fields) {
+    const th = document.createElement("th");
+    th.textContent = f.name;
+    hr.appendChild(th);
+  }
+  const tbody = table.createTBody();
+  for (const row of rows) {
+    const tr = tbody.insertRow();
+    for (const f of fields) {
+      const td = tr.insertCell();
+      const v = row[f.name];
+      td.textContent = v === null ? "" : Array.isArray(v) ? v.join("; ") : String(v);
+    }
+  }
+  document.getElementById("results-wrap").appendChild(table);
+}
+
+function setStatus(msg) {
+  document.getElementById("status").textContent = msg;
+}
+
+function showError(msg) {
+  document.getElementById("error-modal-msg").textContent = msg;
+  document.getElementById("error-modal").classList.add("active");
+}
+
+init().catch(err => {
+  document.getElementById("loading-msg").textContent = "Failed to load DuckDB: " + err.message;
+});
+
+const ua = navigator.userAgent;
+const isMobileSafari = /iPhone|iPad|iPod/.test(ua) && /Safari/.test(ua) && !/CriOS|FxiOS|Chrome/.test(ua);
+if (navigator.connection && navigator.connection.type === "cellular") {
+  document.getElementById("warn-cellular").style.display = "block";
+} else if (isMobileSafari) {
+  document.getElementById("warn-mobile").style.display = "block";
+}
+</script>
