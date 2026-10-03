@@ -1,119 +1,151 @@
 ---
 layout: base.njk
-title: "GCD Comics Data Analytics: About Redash"
+title: "GCD Comics Data Analytics: About"
 permalink: /about-redash/
 ---
 
 # Data Analytics for GCD
 
-Behind our Redash front-end is the Presto query engine, backed by Parquet files in a Hive metastore.
+The [gcd-etl project](https://github.com/youknowjack/gcd-etl) runs a Python/pyarrow pipeline against each
+GCD data dump to produce a denormalized Parquet snapshot. A self-hosted
+[Redash](https://github.com/getredash/redash) instance backed by [DuckDB](https://duckdb.org/) provides
+dashboards and query authoring. You can also query the latest snapshot directly in your browser via the
+[Explore](/explore/) page, which uses DuckDB WASM.
 
 [Sample Queries](/redash-samples/)
 
-## Hive Schema
+## Schema
 
 The `gcdissuesnapshot` table is denormalized from the [GCD schema](https://docs.comics.org/wiki/Current_Schema)
-and partitioned by the `snapshot` date (YYYYMMDD) based on the date of the data dump. Each row in this
-denormalized table corresponds to a row in `gcd_story` or `gcd_issue` if an issue has no linked stories,
-and includes linked data pulled from `gcd_issue`, `gcd_publisher`, `gcd_indica_publisher`, `gcd_brand`, and
-`gcd_story_credit`.
+and partitioned by the `snapshot` date (YYYYMMDD) based on the date of the data dump. Each row corresponds
+to a row in `gcd_story` (or `gcd_issue` if an issue has no linked stories), and includes data pulled from
+`gcd_issue`, `gcd_publisher`, `gcd_indica_publisher`, `gcd_brand`, and `gcd_story_credit`.
 
-Here is the schema as reported by running `show create table gcd.gcdissuesnapshot;` in the Presto client.
+The schema (DuckDB column types):
 
 ```sql
- CREATE TABLE hive.gcd.gcdissuesnapshot (
-    unix_time bigint,
-    issue_id bigint,
-    issue_number_raw varchar,
-    issue_number integer,
-    publication_date integer,
-    price_raw varchar,
-    price array(varchar),
-    page_count integer,
-    indicia_frequency varchar,
-    isbn varchar,
-    variant_name varchar,
-    variant_of_issue_id bigint,
-    barcode varchar,
-    title varchar,
-    on_sale_date integer,
-    rating varchar,
-    volume_not_printed boolean,
-    editing array(varchar),
-    notes varchar,
-    created integer,
-    modified integer,
-    series_id bigint,
-    series_name varchar,
-    series_year_began integer,
-    series_year_ended integer,
-    series_is_current boolean,
-    series_country_code varchar,
-    series_language_code varchar,
-    series_has_gallery boolean,
-    series_is_comics_publication boolean,
-    series_color varchar,
-    series_dimensions varchar,
-    series_paper_stock varchar,
-    series_binding array(varchar),
-    series_publishing_format varchar,
-    series_publishing_type varchar,
-    series_is_singleton boolean,
-    series_created integer,
-    series_modified integer,
-    publisher_id bigint,
-    publisher_name varchar,
-    publisher_country_code varchar,
-    publisher_created integer,
-    publisher_modified integer,
-    publisher_url varchar,
-    indicia_publisher_id bigint,
-    indicia_publisher_name varchar,
-    indicia_publisher_country_code varchar,
-    indicia_publisher_parent_id bigint,
-    indicia_publisher_year_began integer,
-    indicia_publisher_year_ended integer,
-    indicia_publisher_is_surrogate boolean,
-    indicia_publisher_url varchar,
-    indicia_publisher_created integer,
-    indicia_publisher_modified integer,
-    brand_id bigint,
-    brand_name varchar,
-    brand_url varchar,
-    brand_created integer,
-    brand_modified integer,
-    story_id bigint,
-    story_title varchar,
-    story_feature varchar,
-    story_sequence_number integer,
-    story_page_count integer,
-    story_script array(varchar),
-    story_script_creator_id array(bigint),
-    story_pencils array(varchar),
-    story_pencils_creator_id array(bigint),
-    story_inks array(varchar),
-    story_inks_creator_id array(bigint),
-    story_colors array(varchar),
-    story_colors_creator_id array(bigint),
-    story_letters array(varchar),
-    story_letters_creator_id array(bigint),
-    story_editing array(varchar),
-    story_editing_creator_id array(bigint),
-    story_painting array(varchar),
-    story_painting_creator_id array(bigint),
-    story_credit_source varchar,
-    story_genre array(varchar),
-    story_characters array(varchar),
-    story_type varchar,
-    story_job_number varchar,
-    story_first_line varchar,
-    story_created integer,
-    story_modified integer,
-    snapshot integer
- )
- WITH (
-    external_location = 'hdfs://localhost/gcd/parquet',
-    format = 'PARQUET',
-    partitioned_by = ARRAY['snapshot']
- )
+unix_time BIGINT,
+issue_id BIGINT,
+issue_number_raw VARCHAR,
+issue_number INTEGER,
+publication_date INTEGER,
+price_raw VARCHAR,
+price VARCHAR[],
+page_count INTEGER,
+indicia_frequency VARCHAR,
+isbn VARCHAR,
+variant_name VARCHAR,
+variant_of_issue_id BIGINT,
+barcode VARCHAR,
+title VARCHAR,
+on_sale_date INTEGER,
+rating VARCHAR,
+volume_not_printed BOOLEAN,
+editing VARCHAR[],
+notes VARCHAR,
+created INTEGER,
+modified INTEGER,
+series_id BIGINT,
+series_name VARCHAR,
+series_year_began INTEGER,
+series_year_ended INTEGER,
+series_is_current BOOLEAN,
+series_country_code VARCHAR,
+series_language_code VARCHAR,
+series_has_gallery BOOLEAN,
+series_is_comics_publication BOOLEAN,
+series_color VARCHAR,
+series_dimensions VARCHAR,
+series_paper_stock VARCHAR,
+series_binding VARCHAR[],
+series_publishing_format VARCHAR,
+series_publishing_type VARCHAR,
+series_is_singleton BOOLEAN,
+series_created INTEGER,
+series_modified INTEGER,
+publisher_id BIGINT,
+publisher_name VARCHAR,
+publisher_country_code VARCHAR,
+publisher_created INTEGER,
+publisher_modified INTEGER,
+publisher_url VARCHAR,
+indicia_publisher_id BIGINT,
+indicia_publisher_name VARCHAR,
+indicia_publisher_country_code VARCHAR,
+indicia_publisher_parent_id BIGINT,
+indicia_publisher_year_began INTEGER,
+indicia_publisher_year_ended INTEGER,
+indicia_publisher_is_surrogate BOOLEAN,
+indicia_publisher_url VARCHAR,
+indicia_publisher_created INTEGER,
+indicia_publisher_modified INTEGER,
+brand_id BIGINT,
+brand_name VARCHAR,
+brand_url VARCHAR,
+brand_created INTEGER,
+brand_modified INTEGER,
+story_id BIGINT,
+story_title VARCHAR,
+story_feature VARCHAR,
+story_sequence_number INTEGER,
+story_page_count INTEGER,
+story_script VARCHAR[],
+story_script_creator_id BIGINT[],
+story_pencils VARCHAR[],
+story_pencils_creator_id BIGINT[],
+story_inks VARCHAR[],
+story_inks_creator_id BIGINT[],
+story_colors VARCHAR[],
+story_colors_creator_id BIGINT[],
+story_letters VARCHAR[],
+story_letters_creator_id BIGINT[],
+story_editing VARCHAR[],
+story_editing_creator_id BIGINT[],
+story_painting VARCHAR[],
+story_painting_creator_id BIGINT[],
+story_credit_source VARCHAR,
+story_genre VARCHAR[],
+story_characters VARCHAR[],
+story_type VARCHAR,
+story_job_number VARCHAR,
+story_first_line VARCHAR,
+story_created INTEGER,
+story_modified INTEGER,
+snapshot INTEGER
 ```
+
+## Architecture
+
+```
+GCD MySQL dump
+      │
+      ▼
+pipeline.py (Python + pyarrow)
+      │
+      ▼
+gcd-parquet/snapshot=YYYYMMDD/*.parquet  (local + S3)
+      │
+      ├─► DuckDB (local) ──► Redash (Docker)
+      │
+      └─► DuckDB WASM (browser) ◄── parquet.gcdata.org
+```
+
+## Historical: Hive/Presto architecture (pre-2026)
+
+Prior to 2026 the pipeline was a Java/Maven project using the Cloudera CDH 5 distribution to write Parquet
+via Avro, stored in HDFS, served by a Hive metastore and Presto query engine. The Hive DDL for the table was:
+
+```sql
+CREATE TABLE hive.gcd.gcdissuesnapshot (
+   ...columns as above...
+)
+WITH (
+   external_location = 'hdfs://localhost/gcd/parquet',
+   format = 'PARQUET',
+   partitioned_by = ARRAY['snapshot']
+)
+```
+
+The pipeline ran on CDH 5.4.11 (a 2015-era Hadoop distribution, EOL) and required ~300 Maven/CDH jars to
+write a single Parquet file. It was replaced by a Python/pyarrow pipeline that eliminated the Hadoop,
+Hive, and Presto daemons entirely.
