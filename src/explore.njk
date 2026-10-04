@@ -197,10 +197,13 @@ LIMIT 20`
   {
     label: "Top writers",
     sql: `SELECT name, COUNT(DISTINCT story_id) AS stories
-FROM gcdissuesnapshot
+FROM (
+  SELECT story_id, story_script
+  FROM gcdissuesnapshot
+  WHERE snapshot = ${SNAPSHOT}
+)
 CROSS JOIN UNNEST(story_script) AS t(name)
-WHERE snapshot = ${SNAPSHOT}
-  AND name NOT IN ('', '[unknown]', '[various]', '[none]', 'various')
+WHERE name NOT IN ('', '[unknown]', '[various]', '[none]', 'various')
   AND name NOT LIKE '?%'
 GROUP BY name
 ORDER BY stories DESC
@@ -222,10 +225,13 @@ LIMIT 30`
   {
     label: "Most prolific pencillers",
     sql: `SELECT name, COUNT(DISTINCT story_id) AS stories
-FROM gcdissuesnapshot
+FROM (
+  SELECT story_id, story_pencils
+  FROM gcdissuesnapshot
+  WHERE snapshot = ${SNAPSHOT}
+)
 CROSS JOIN UNNEST(story_pencils) AS t(name)
-WHERE snapshot = ${SNAPSHOT}
-  AND name NOT IN ('', '[unknown]', '[various]', '[none]', 'various')
+WHERE name NOT IN ('', '[unknown]', '[various]', '[none]', 'various')
   AND name NOT LIKE '?%'
 GROUP BY name
 ORDER BY stories DESC

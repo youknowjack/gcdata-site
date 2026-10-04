@@ -9,12 +9,15 @@ SELECT story.writer,
          count(distinct(issue_id)) AS issues,
          count(distinct(series_id)) AS series,
          count(distinct(publisher_id)) AS publishers
-FROM gcd.gcdissuesnapshot
+FROM (
+    SELECT issue_id, series_id, publisher_id, story_script
+    FROM gcd.gcdissuesnapshot
+    WHERE snapshot = SNAPSHOT_DATE_HERE
+      AND series_language_code = 'en' AND variant_of_issue_id = 0
+)
 CROSS JOIN UNNEST(story_script) AS story(writer)
-WHERE snapshot = SNAPSHOT_DATE_HERE AND
-        story.writer NOT LIKE '%?%' AND story.writer != '' AND
-        series_language_code = 'en' AND variant_of_issue_id = 0
-GROUP BY  story.writer
-ORDER BY  issues DESC
+WHERE story.writer NOT LIKE '%?%' AND story.writer != ''
+GROUP BY story.writer
+ORDER BY issues DESC
 LIMIT 1000
 ```

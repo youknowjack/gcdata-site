@@ -7,12 +7,15 @@ position: 60
 ```sql
 SELECT i.price,
         count(distinct(issue_id)) as issues
-FROM gcd.gcdissuesnapshot
-CROSS JOIN UNNEST(price) AS i(price)
-WHERE snapshot = SNAPSHOT_DATE_HERE AND
-        i.price LIKE '%USD%' AND
+FROM (
+    SELECT issue_id, price
+    FROM gcd.gcdissuesnapshot
+    WHERE snapshot = SNAPSHOT_DATE_HERE AND
         publication_date >= 20190000 AND
         publication_date <= 21009999
+)
+CROSS JOIN UNNEST(price) AS i(price)
+WHERE i.price LIKE '%USD%'
 GROUP BY i.price
 ORDER BY issues DESC
 LIMIT 10

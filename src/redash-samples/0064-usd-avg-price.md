@@ -9,16 +9,19 @@ position: 64
 SELECT CAST(publication_date//10000 as varchar) as year,
         ROUND(avg(cast(regexp_extract(i.price, '[0-9]+\.[0-9]+') as double)), 2) as average_price,
         count(1) as unique_issue_count
-FROM gcd.gcdissuesnapshot
-CROSS JOIN UNNEST(price) AS i(price)
-WHERE snapshot = SNAPSHOT_DATE_HERE AND
+FROM (
+    SELECT publication_date, price
+    FROM gcd.gcdissuesnapshot
+    WHERE snapshot = SNAPSHOT_DATE_HERE AND
         series_language_code = 'en' AND
         series_country_code = 'us' AND
         page_count = 36 AND
         variant_of_issue_id = 0 AND
-        regexp_matches(i.price, '^[0-9]+\.[0-9]+ ?USD') AND
         publication_date >= 19700000 AND
         publication_date <= 20259999
+)
+CROSS JOIN UNNEST(price) AS i(price)
+WHERE regexp_matches(i.price, '^[0-9]+\.[0-9]+ ?USD')
 GROUP BY publication_date//10000
 ORDER BY year DESC
 ```
