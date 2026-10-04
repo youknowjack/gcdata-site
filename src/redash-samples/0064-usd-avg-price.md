@@ -21,7 +21,7 @@ FROM (
         publication_date <= 20259999
 )
 CROSS JOIN UNNEST(price) AS i(price)
-WHERE regexp_full_match(i.price, '^[0-9]+\.[0-9]+ ?USD')
+WHERE regexp_matches(i.price, '^[0-9]+\.[0-9]+ ?USD')
 GROUP BY publication_date//10000
 ORDER BY year DESC
 ```
